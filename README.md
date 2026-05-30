@@ -78,7 +78,7 @@ Time Complexity:       O(k log N)  [where k = price levels crossed]
 ----------------------------------------------------------------------
 Running the Simulation:
 Execute the primary simulation harness from the root directory:
-python main.py
+`python main.py`
 
 Running Test Verification:
 To validate engine mechanics, boundary edge-cases, and execution
