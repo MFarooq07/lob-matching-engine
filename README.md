@@ -14,7 +14,7 @@ management.
 ## PROJECT STRUCTURE
 ----------------------------------------------------------------------
 ```
-Trade/
+lob-matching-engine/
 ├── main.py              # Application entry point & simulation config
 ├── engine/
 │   ├── `__init__.py`      # Package level exports
@@ -22,7 +22,7 @@ Trade/
 │   ├── `book.py`          # Dual-sided matching engine logic
 │   └── `simulation.py`    # Random-walk harness and quoting bot
 └── tests/
-│    └── `test_book.py `    # Comprehensive unit testing suite
+│   └── `test_book.py `    # Comprehensive unit testing suite
 
 ```
 ----------------------------------------------------------------------
