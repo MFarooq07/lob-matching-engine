@@ -83,6 +83,6 @@ Execute the primary simulation harness from the root directory:
 Running Test Verification:
 To validate engine mechanics, boundary edge-cases, and execution
 accuracy, run the unittest suite:
-python -m unittest discover -s tests
+`python -m unittest discover -s tests`
 
 ======================================================================#
