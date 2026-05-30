@@ -1,31 +1,41 @@
 # HIGH-PERFORMANCE LIMIT ORDER BOOK (LOB) & MARKET MAKING SIMULATOR
 ----------------------------------------------------------------------
+flowchart TD
+    %% Styling
+    classDef mapStyle fill:#f9f,stroke:#333,stroke-width:2px;
+    classDef listStyle fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef queueStyle fill:#bfb,stroke:#333,stroke-width:2px;
+    classDef modelStyle fill:#fbb,stroke:#333,stroke-width:2px;
 
-┌──────────────────────────────┐
-                  │   OrderBook Engine Context   │
-                  └──────────────┬───────────────┘
-                                 │
-         ┌───────────────────────┼───────────────────────┐
-         ▼                       ▼                       ▼
- ┌──────────────┐        ┌──────────────┐        ┌──────────────┐
- │  _order_map  │        │ _bid_levels  │        │ _ask_levels  │
- │    (dict)    │        │    (dict)    │        │    (dict)    │
- └───────┬──────┘        └───────┬──────┘        └───────┬──────┘
-         │                       │                       │
-         │ key: order_id         │ key: price            │ key: price
-         ▼                       ▼                       ▼
- ┌──────────────┐        ┌──────────────┐        ┌──────────────┐
- │  LimitOrder  │        │  Fast deque  │        │  Fast deque  │
- │  (Resting)   │◄───────┤ (FIFO Queue) │        │ (FIFO Queue) │
- └──────────────┘        └───────┬──────┘        └───────┬──────┘
-                                 │                       │
-                                 ▼                       ▼
-                         ┌──────────────┐        ┌──────────────┐
-                         │ _bid_prices  │        │ _ask_prices  │
-                         │(Sorted list) │        │(Sorted list) │
-                         └──────────────┘        └──────────────┘
-                         [Best = last]           [Best = first]
-    
+    %% Core Entry
+    OrderBook[OrderBook Engine Instance] --> orderMap
+    OrderBook --> bidPrices
+    OrderBook --> askPrices
+
+    %% Order Map Lookup Vector
+    orderMap["_order_map <br> dict: order_id -> LimitOrder"]:::mapStyle
+    orderMap -->|O(1) Instant In-Place Cancel| loResting1
+
+    %% Bid Side Data Structures
+    subgraph bid_side ["Bid Side Data Structures (Buy Orders)"]
+        bidPrices["_bid_prices <br> list: Sorted Ascending"]:::listStyle
+        bidLevels["_bid_levels <br> dict: price -> deque"]:::mapStyle
+        
+        bidPrices -->|Best Bid is last element| bestBid["prices[-1]"]
+        bidLevels -->|Key Access| bidDeque["collections.deque"]:::queueStyle
+        bidDeque -->|FIFO Element 1| loResting1["LimitOrder Dataclass"]:::modelStyle
+        bidDeque -->|FIFO Element 2| loResting2["LimitOrder Dataclass"]:::modelStyle
+    end
+
+    %% Ask Side Data Structures
+    subgraph ask_side ["Ask Side Data Structures (Sell Orders)"]
+        askPrices["_ask_prices <br> list: Sorted Ascending"]:::listStyle
+        askLevels["_ask_levels <br> dict: price -> deque"]:::mapStyle
+        
+        askPrices -->|Best Ask is first element| bestAsk["prices[0]"]
+        askLevels -->|Key Access| askDeque["collections.deque"]:::queueStyle
+        askDeque -->|FIFO Element 1| loResting3["LimitOrder Dataclass"]:::modelStyle
+    end
 A lightweight, deterministic, high-performance in-memory Limit Order
 Book (LOB) matching engine and algorithmic market-making simulation
 built from scratch in pure Python 3.1.
