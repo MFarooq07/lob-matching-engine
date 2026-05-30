@@ -7,7 +7,7 @@ flowchart TD
     classDef mapStyle fill:#bbf,stroke:#333,stroke-width:2px;
     classDef listStyle fill:#bbf,stroke:#333,stroke-width:2px;
     classDef queueStyle fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef modelStyle fill:#fff,stroke:#333,stroke-width:2px;
+    classDef modelStyle fill:#aaa,stroke:#333,stroke-width:2px;
 
     %% Base Structural Framework
     OrderBook[OrderBook Engine Instance] --> orderMap
