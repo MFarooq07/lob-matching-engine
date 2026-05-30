@@ -1,18 +1,13 @@
 # HIGH-PERFORMANCE LIMIT ORDER BOOK (LOB) & MARKET MAKING SIMULATOR
 ----------------------------------------------------------------------
-flowchart TD
-    %% Styling
-    classDef mapStyle fill:#f9f,stroke:#333,stroke-width:2px;
-    classDef listStyle fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef queueStyle fill:#bfb,stroke:#333,stroke-width:2px;
-    classDef modelStyle fill:#fbb,stroke:#333,stroke-width:2px;
+
 ```mermaid
 flowchart TD
     %% Style Formats
     classDef mapStyle fill:#bbf,stroke:#333,stroke-width:2px;
     classDef listStyle fill:#bbf,stroke:#333,stroke-width:2px;
     classDef queueStyle fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef modelStyle fill:#bbf,stroke:#333,stroke-width:2px;
+    classDef modelStyle fill:#fff,stroke:#333,stroke-width:2px;
 
     %% Base Structural Framework
     OrderBook[OrderBook Engine Instance] --> orderMap
