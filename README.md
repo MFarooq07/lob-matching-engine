@@ -4,10 +4,10 @@
 ```mermaid
 flowchart TD
     %% Style Formats
-    classDef mapStyle fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef listStyle fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef queueStyle fill:#bbf,stroke:#333,stroke-width:2px;
-    classDef modelStyle fill:#000,stroke:#333,stroke-width:2px;
+    classDef mapStyle fill:#00f,stroke:#333,stroke-width:2px;
+    classDef listStyle fill:#0f0,stroke:#333,stroke-width:2px;
+    classDef queueStyle fill:#f00,stroke:#333,stroke-width:2px;
+    classDef modelStyle fill:#f0f,stroke:#333,stroke-width:2px;
 
     %% Base Structural Framework
     OrderBook[OrderBook Engine Instance] --> orderMap
