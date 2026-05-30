@@ -1,8 +1,7 @@
 # HIGH-PERFORMANCE LIMIT ORDER BOOK (LOB) & MARKET MAKING SIMULATOR
 ----------------------------------------------------------------------
 
-```
-mermaid
+```mermaid
 graph TD
     %% Styling
     classDef mapStyle fill:#f9f,stroke:#333,stroke-width:2px;
