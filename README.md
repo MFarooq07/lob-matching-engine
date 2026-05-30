@@ -37,8 +37,8 @@ graph TD
         _ask_prices -->|Best Ask is first element| BestAsk[prices[0]]
         _ask_levels -->|Key Access| AskDeque[collections.deque]:::queueStyle
         AskDeque -->|FIFO Element 1| LO_Resting3[LimitOrder Dataclass]:::modelStyle
-    end
-```
+    end```
+    
 A lightweight, deterministic, high-performance in-memory Limit Order
 Book (LOB) matching engine and algorithmic market-making simulation
 built from scratch in pure Python 3.1.
