@@ -21,8 +21,8 @@ lob-matching-engine/
 │   ├── `models.py`        # Core domain dataclasses (Orders, Trades)
 │   ├── `book.py`          # Dual-sided matching engine logic
 │   └── `simulation.py`    # Random-walk harness and quoting bot
-└── tests/
-│   └── `test_book.py `    # Comprehensive unit testing suite
+├── tests/
+    └── `test_book.py `    # Comprehensive unit testing suite
 
 ```
 ----------------------------------------------------------------------
