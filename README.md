@@ -7,37 +7,11 @@ flowchart TD
     classDef queueStyle fill:#bfb,stroke:#333,stroke-width:2px;
     classDef modelStyle fill:#fbb,stroke:#333,stroke-width:2px;
 ```mermaid
-%% Core Entry Connections
-OrderBook[OrderBook Engine Instance] --> orderMap
-OrderBook --> bidPrices
-OrderBook --> bidLevels
-OrderBook --> askPrices
-OrderBook --> askLevels
-
-%% Order Map Lookup Vector
-orderMap["_order_map <br> dict: order_id to LimitOrder"]:::mapStyle
-orderMap -->|"O(1) Instant In-Place Cancel"| loResting1
-
-%% Bid Side Data Structures
-subgraph bid_side ["Bid Side Data Structures (Buy Orders)"]
-    bidPrices["_bid_prices <br> list: Sorted Ascending"]:::listStyle
-    bidLevels["_bid_levels <br> dict: price to deque"]:::mapStyle
-    
-    bidPrices -->|"Best Bid is last element"| bestBid["prices[-1]"]
-    bidLevels -->|"Key Access"| bidDeque["collections.deque"]:::queueStyle
-    bidDeque -->|"FIFO Element 1"| loResting1["LimitOrder Dataclass"]:::modelStyle
-    bidDeque -->|"FIFO Element 2"| loResting2["LimitOrder Dataclass"]:::modelStyle
-end
-
-%% Ask Side Data Structures
-subgraph ask_side ["Ask Side Data Structures (Sell Orders)"]
-    askPrices["_ask_prices <br> list: Sorted Ascending"]:::listStyle
-    askLevels["_ask_levels <br> dict: price to deque"]:::mapStyle
-    
-    askPrices -->|"Best Ask is first element"| bestAsk["prices[0]"]
-    askLevels -->|"Key Access"| askDeque["collections.deque"]:::queueStyle
-    askDeque -->|"FIFO Element 1"| loResting3["LimitOrder Dataclass"]:::modelStyle
-end
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
 ```
 A lightweight, deterministic, high-performance in-memory Limit Order
 Book (LOB) matching engine and algorithmic market-making simulation
